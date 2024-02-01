@@ -1,0 +1,35 @@
+name: Maven Build Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+
+    - name: Build and execute Maven goals
+      run: |
+        mvn clean install
+        mvn validate
+        mvn compile
+        mvn test
+        mvn package
+        mvn verify
+        mvn install
+        mvn deploy
+        mvn site
+
+    - name: Display Maven output
+      run: cat target/maven-failsafe-plugin*.txt
