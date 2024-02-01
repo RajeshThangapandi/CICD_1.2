@@ -33,3 +33,4 @@ jobs:
 
     - name: Display Maven output
       run: cat target/maven-failsafe-plugin*.txt
+
